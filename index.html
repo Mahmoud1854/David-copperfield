@@ -7,6 +7,78 @@
 <link rel="stylesheet" href="style.css">
 <style>
 body { zoom: 0.92; }
+
+/* ===== CELEBRATION ANIMATION ===== */
+#celebrate{
+  display:none;
+  text-align:center;
+  background: linear-gradient(135deg, #fff3b0, #ffd166, #c9a86a);
+  color:#000;
+  border-radius:18px;
+  padding:22px 14px;
+  margin-top:14px;
+  overflow:hidden;
+  position:relative;
+  animation: celebratePop 0.6s ease, celebrateGlow 1.2s infinite alternate;
+  box-shadow: 0 0 30px #ffd700;
+}
+@keyframes celebratePop{
+  0%{ transform: scale(0.3) rotate(-5deg); opacity:0; }
+  60%{ transform: scale(1.15) rotate(2deg); opacity:1; }
+  100%{ transform: scale(1) rotate(0deg); }
+}
+@keyframes celebrateGlow{
+  from{ box-shadow: 0 0 15px #ffd700; }
+  to{ box-shadow: 0 0 35px #ffae00, 0 0 55px #fff700; }
+}
+#celebrate h2{
+  font-size:28px;
+  margin:0;
+  animation: bounceText 0.8s infinite alternate;
+}
+@keyframes bounceText{
+  from{ transform: translateY(0) scale(1); }
+  to{ transform: translateY(-8px) scale(1.05); }
+}
+#celebrate p{
+  font-size:17px;
+  font-weight:700;
+  margin:8px 0 0 0;
+}
+#celebrate .stars{
+  font-size:34px;
+  animation: starsSpin 1s infinite alternate;
+  display:block;
+}
+@keyframes starsSpin{
+  from{ transform: rotate(-8deg) scale(1); }
+  to{ transform: rotate(8deg) scale(1.2); }
+}
+.confetti{
+  position:absolute;
+  top:-20px;
+  font-size:22px;
+  animation: confettiFall 2.5s linear infinite;
+}
+.confetti:nth-child(1){ left:10%; animation-delay:0s; }
+.confetti:nth-child(2){ left:25%; animation-delay:0.4s; }
+.confetti:nth-child(3){ left:45%; animation-delay:0.8s; }
+.confetti:nth-child(4){ left:65%; animation-delay:0.2s; }
+.confetti:nth-child(5){ left:85%; animation-delay:0.6s; }
+@keyframes confettiFall{
+  0%{ transform: translateY(-20px) rotate(0deg); opacity:1; }
+  100%{ transform: translateY(180px) rotate(360deg); opacity:0; }
+}
+#score{
+  font-size:20px;
+  font-weight:800;
+  text-align:center;
+  animation: scorePop 0.5s ease;
+}
+@keyframes scorePop{
+  0%{ transform: scale(0.5); }
+  100%{ transform: scale(1); }
+}
 </style>
 </head>
 <body>
@@ -14,8 +86,7 @@ body { zoom: 0.92; }
 <div id="home" class="page active">
 <div class="book-cover"><div class="title">DAVID<br><b>COPPERFIELD</b></div><div class="ch-badge">CHAPTERS 1-6 COMPLETE BIG CONTENT 4 CHOICES AUTO CORRECT BY JONATHAN</div></div>
 
-<!-- Video - Summary Explained -->
-<img src="./David.jpeg"
+<img src="./david.png"
      alt="David Copperfield"
      class="home-bg-img">
 <div class="video-box">
@@ -78,6 +149,15 @@ body { zoom: 0.92; }
 <div class="q-item"><b>19. Who is truly loyal?</b><label><input type="radio" name="q19"> A) Murdstone</label><label><input type="radio" name="q19"> B) Creakle</label><label><input type="radio" name="q19" data-correct="1"> C) Peggotty never forget look after mother</label><label><input type="radio" name="q19"> D) Jane Murdstone</label><p class="ans"></p></div>
 <div class="q-item"><b>20. Why no cane for Steerforth?</b><label><input type="radio" name="q20"> A) Never makes mistakes</label><label><input type="radio" name="q20" data-correct="1"> B) Rich handsome Miss Creakle in love with him privileged</label><label><input type="radio" name="q20"> C) Too young</label><label><input type="radio" name="q20"> D) He is teacher</label><p class="ans"></p></div>
 <button onclick="checkAnswers()" class="btn-gold">Check Score - Auto Correct Shows Correct Answer</button><p id="score"></p>
+
+<!-- CELEBRATION BOX -->
+<div id="celebrate">
+<span class="confetti">🎉</span><span class="confetti">⭐</span><span class="confetti">🎊</span><span class="confetti">💛</span><span class="confetti">✨</span>
+<span class="stars">⭐⭐⭐⭐⭐</span>
+<h2>🎉 GREAT JOB! 🎉</h2>
+<p>You finished Chapters 1-6<br>Amazing work! Keep going 💪</p>
+</div>
+
 <div class="divider"><h2 style="color:#c9a86a;margin:0">Essay - Light Easy - 6 Questions Only</h2><p style="color:#aaa">Answer in 2 lines only - light</p></div>
 <div class="card"><b style="color:#c9a86a">1. Ch1 Easy: Why did Betsey come? Why did she leave?</b><br><small style="color:#888">Hint: Wanted girl Betsey Trotwood Copperfield, got boy, swung hat</small><textarea id="open1_1" class="input" rows="3"></textarea><button onclick="saveOpen('open1_1')" class="btn-gold">Save</button><p id="s_open1_1" class="saved-text"></p></div>
 <div class="card"><b style="color:#c9a86a">2. Ch2 Easy: Who is Murdstone? Describe him.</b><br><small style="color:#888">Hint: Black hair deep voice comes Sunday David jealous push</small><textarea id="open2_1" class="input" rows="3"></textarea><button onclick="saveOpen('open2_1')" class="btn-gold">Save</button><p id="s_open2_1" class="saved-text"></p></div>
@@ -89,7 +169,6 @@ body { zoom: 0.92; }
 </div>
 </div>
 <div id="notes" class="page">
-<!-- A Kind Word For Mr. Michael - In Notes -->
 <div class="card" style="text-align:center">
 <h2>💛 A Kind Word For Mr. Michael</h2>
 <p>Dear Mr. Michael,<br>
@@ -112,5 +191,17 @@ Thank you, Mr. Michael.</p>
 <button onclick="showPage('rating',this)">Rating</button>
 </div>
 <script src="script.js"></script>
+<script>
+window.addEventListener('load', function(){
+  var originalCheck = window.checkAnswers;
+  window.checkAnswers = function(){
+    if(originalCheck) originalCheck();
+    setTimeout(function(){
+      var c = document.getElementById('celebrate');
+      if(c){ c.style.display='block'; c.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }, 300);
+  };
+});
+</script>
 </body>
 </html>
